@@ -2,7 +2,7 @@
 
 // There are 4 buttons that are used to play the game
 // The buttons are Add, minus, multiply, divide
-// At the top of the page is a number between 1 and 100, called the goal
+// At the top of the page is a number between 1 and 1000, called the goal
 // The number is generated randomly
 // Below that number is a score
 // the score is 1 initially
@@ -38,7 +38,8 @@ const Home = () => {
   const [turns, setTurns] = useState(0);
 
   useEffect(() => {
-    setGoal(Math.floor(Math.random() * 100) + 1);
+    // generate random number between 1 and 1000
+    setGoal(Math.floor(Math.random() * 1000) + 1);
     // set randomNumber to a new random number
     setRandomNumber(generateRandomNumber());
   }, []);
@@ -72,7 +73,8 @@ const Home = () => {
   };
 
   const handleDivide = () => {
-    setScoreFunction(score / randomNumber);
+    // if result is not an integer, make it one before setting score
+    setScoreFunction(Math.floor(score / randomNumber));
   };
 
   const handleGameReset = () => {
@@ -86,6 +88,16 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center ">
       <h1>Math Game</h1>
+      {/* explain the game */}
+      <p>
+        The goal is to get the number to match the number on the screen. You can
+        add, subtract, multiply or divide the number on the screen to get the
+        goal number.
+      </p>
+      <p>
+        You want to get the number to match the goal number in the fewest number
+        of turns.
+      </p>
       {/* buttons */}
       <div className="flex flex-col items-center justify-center ">
         <button
